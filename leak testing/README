@@ -1,0 +1,14 @@
+In order to check for leaks in the program you can use the following command:
+
+valgrind --leak-check=full --show-leak-kinds=all --suppressions=supp_rl --track-origins=yes --track-fds=all ./minishell
+
+This command also supresses the leaks from the external readline() function that was used in the project. The command must wun with both the minishell executable and the supp_rl file.
+
+The content of supp_rl should be as followed:
+
+{
+    ignore_libreadline_conditional_jump_errors
+    Memcheck:Leak
+    ...
+    obj:/*libreadline.so.*
+}
